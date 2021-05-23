@@ -1,7 +1,7 @@
 import express, { Application, Response } from 'express';
 import { DBConfig } from './configs/DB-config';
 import { ICustomReq } from './interfaces/custom-req-interface';
-// import { centralRouter } from './routers/central-router';
+import { centralRouter } from './routers/central-router';
 import cors from 'cors';
 
 class App {
@@ -38,7 +38,7 @@ class App {
         this.framework.use(cors());
         this.framework.use(express.json());
         this.framework.use(express.urlencoded({ extended: true }));
-        // this.framework.use(centralRouter);
+        this.framework.use(centralRouter);
     }
 }
 
