@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ErrorHandler } from '../middlewares/error-handler-middleware';
 import { authRouter } from './auth-router';
+import { userRouter } from './user-router';
 
 class RCentral {
     private router: Router;
@@ -15,7 +16,8 @@ class RCentral {
     }
 
     private middlewares(): void {
-        this.router.use('/auth', authRouter)
+        this.router.use('/auth', authRouter);
+        this.router.use('/users', userRouter);
         this.router.use(ErrorHandler.handleErrors);
     }
 }

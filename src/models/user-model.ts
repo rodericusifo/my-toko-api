@@ -25,13 +25,11 @@ const UserSchema = new Schema(
         role: {
             type: String,
             trim: true,
-            unique: true,
             required: true
         },
         ownerName: {
             type: String,
-            trim: true,
-            unique: true
+            trim: true
         }
     },
     { timestamps: true }
