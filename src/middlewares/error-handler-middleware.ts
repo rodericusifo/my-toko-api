@@ -14,6 +14,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Users not Found':
+                statusCode = 404;
+                message = 'Users not Found: Cannot find users';
+                status = 'Not Found';
+                break;
             case 'Forbidden Role Access':
                 statusCode = 403;
                 message =

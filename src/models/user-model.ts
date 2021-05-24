@@ -26,10 +26,6 @@ const UserSchema = new Schema(
             type: String,
             trim: true,
             required: true
-        },
-        ownerName: {
-            type: String,
-            trim: true
         }
     },
     { timestamps: true }

@@ -21,6 +21,11 @@ class RUser {
             [JWTAuthorization.ownerAuthorization],
             UserController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerAuthorization],
+            UserController.list
+        );
     }
 }
 

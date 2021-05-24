@@ -8,10 +8,18 @@ const userCreate = async (
 ) => {
     const decoded = JWTDecodeAuthToken(authToken);
     const userCreated = await request(app)
-        .post(`/users/create?userID=${decoded.id}&&ownerName=${decoded.name}`)
+        .post(`/users/create?userID=${decoded.id}`)
         .set('Authorization', `${authToken}`)
         .send(user);
     return userCreated;
 };
 
-export { userCreate };
+const userList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const userListed = await request(app)
+        .get(`/users/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return userListed;
+};
+
+export { userCreate, userList };
