@@ -5,7 +5,6 @@ interface IUserDoc extends Document {
     email: string;
     password: string;
     role: string;
-    ownerName?: string;
 }
 
 export { IUserDoc };
