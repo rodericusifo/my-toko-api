@@ -12,8 +12,20 @@ class ErrorHandler {
         let statusCode;
         let message;
         let status;
-        // Error - Switch case
+
         switch (err.name) {
+            case 'Forbidden Role Access':
+                statusCode = 403;
+                message =
+                    'Forbidden Role Access: Sorry, access is restricted, your role not allowed do this action';
+                status = 'Forbidden';
+                break;
+            case 'Name, Email, Password, and Role Required':
+                statusCode = 422;
+                message =
+                    'Name, Email, Password, and Role Required: User name, email, password, and role required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case `Combination doesn't Match`:
                 statusCode = 401;
                 message = `Combination doesn't Match: Password combination with your (username or email) does not match`;
@@ -69,7 +81,7 @@ class ErrorHandler {
                 status = 'Internal Server Error';
                 break;
         }
-        // Send Response
+
         res.status(statusCode).json({
             success: false,
             message: message,
