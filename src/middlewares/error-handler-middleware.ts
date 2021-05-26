@@ -1,7 +1,6 @@
 import { Response, NextFunction, ErrorRequestHandler } from 'express';
 import { ICustomReq } from '../interfaces/custom-req-interface';
 
-
 class ErrorHandler {
     static handleErrors(
         err: ErrorRequestHandler,
@@ -33,7 +32,7 @@ class ErrorHandler {
                 break;
             case `Combination doesn't Match`:
                 statusCode = 401;
-                message = `Combination doesn't Match: Password combination with your (username or email) does not match`;
+                message = `Combination doesn't Match: Password combination with your email does not match`;
                 status = 'Unauthorized';
                 break;
             case 'Invalid Email':
