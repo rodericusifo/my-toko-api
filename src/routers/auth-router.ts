@@ -15,6 +15,10 @@ class RAuth {
 
     private routers(): void {
         this.router.post('/login', AuthController.login);
+        this.router.post(
+            '/password/reset-request',
+            AuthController.passwordResetRequest
+        );
     }
 }
 
