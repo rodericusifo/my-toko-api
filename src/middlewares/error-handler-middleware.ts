@@ -13,6 +13,17 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Email not Registered':
+                statusCode = 404;
+                message = 'Email not Registered: Your email not registered';
+                status = 'Not Found';
+                break;
+            case 'Email Required':
+                statusCode = 422;
+                message =
+                    'Email Required: Your email required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'Users not Found':
                 statusCode = 404;
                 message = 'Users not Found: Cannot find users';
