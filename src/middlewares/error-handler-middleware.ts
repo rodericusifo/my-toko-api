@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'New Password Required':
+                statusCode = 422;
+                message =
+                    'New Password Required: Your new password required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'Email not Registered':
                 statusCode = 404;
                 message = 'Email not Registered: Your email not registered';

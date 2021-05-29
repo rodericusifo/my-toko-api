@@ -70,11 +70,11 @@ class AuthController {
                     throw { name: 'Invalid Email' };
                 }
             }
-            const passwordResetRequestUser = {
+            const userPasswordResetRequest = {
                 email: req.body.email
             };
             const foundOneUser = await UserModel.findOne({
-                email: passwordResetRequestUser.email
+                email: userPasswordResetRequest.email
             });
             if (!foundOneUser) {
                 throw { name: 'Email not Registered' };
@@ -112,6 +112,49 @@ class AuthController {
             res.status(200).json({
                 success: true,
                 message: 'Email Successfully Sent',
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async passwordReset(
+        req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            if (!req.body.password) {
+                throw { name: 'New Password Required' };
+            }
+            const decoded = jwt.verify(
+                req.query.token as string,
+                process.env.SECRET_KEY!
+            ) as { id: string; secretResetPasswordCode: string };
+            if (
+                !(
+                    decoded.secretResetPasswordCode ===
+                    process.env.SECRET_RESET_PASSWORD_CODE!
+                )
+            ) {
+                throw { name: 'JsonWebTokenError' };
+            }
+            const userPasswordReset = {
+                password: req.body.password
+            };
+            if (req.body.password) {
+                userPasswordReset.password = await bcrypt.hash(req.body.password, 8);
+            }
+            await UserModel.findOneAndUpdate(
+                { _id: decoded.id },
+                userPasswordReset,
+                { new: true }
+            );
+            res.status(200).json({
+                success: true,
+                message: 'Password Successfully Reseted',
                 status: 'OK',
                 statusCode: 200
             });
