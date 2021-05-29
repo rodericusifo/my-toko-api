@@ -6,9 +6,4 @@ const authLogin = async (user: { email?: string; password?: string }) => {
     return authLogged;
 };
 
-const authPasswordResetRequest = async (user: { email?: string}) => {
-    const authPasswordResetRequested = await request(app).post('/auth/password/reset-request').send(user);
-    return authPasswordResetRequested;
-};
-
-export { authLogin, authPasswordResetRequest };
+export { authLogin };

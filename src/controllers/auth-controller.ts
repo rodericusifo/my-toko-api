@@ -89,17 +89,18 @@ class AuthController {
                 { expiresIn: '1h' }
             );
             const transporter = nodemailer.createTransport({
-                host: 'smtp.ethereal.email',
+                host: 'smtp.gmail.com',
                 port: 587,
                 secure: false,
+                requireTLS: true,
                 auth: {
-                    user: 'rodericus1203@gmail.com',
-                    pass: '@12maret1999'
+                    user: process.env.EMAIL!,
+                    pass: process.env.EMAIL_PASS!
                 }
             });
 
             const mailOptions = {
-                from: 'rodericus1203@gmail.com',
+                from: process.env.EMAIL!,
                 to: foundOneUser.email,
                 subject: `My Toko's Account Reset Password Link`,
                 html: `<p>To reset your account's password, please click the link below</p><a href="${process
@@ -115,7 +116,6 @@ class AuthController {
                 statusCode: 200
             });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
