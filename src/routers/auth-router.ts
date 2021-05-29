@@ -19,6 +19,7 @@ class RAuth {
             '/password/reset-request',
             AuthController.passwordResetRequest
         );
+        this.router.post('/password/reset', AuthController.passwordReset);
     }
 }
 
