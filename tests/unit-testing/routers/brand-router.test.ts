@@ -35,5 +35,11 @@ describe('POST /brands/create - Brands Create Endpoint', () => {
             }
         );
         expect(brandCreated.status).toEqual(201);
+        expect(brandCreated.body).toEqual({
+            success: true,
+            message: 'Create Brand Success',
+            status: 'Created',
+            statusCode: 201
+        })
     });
 });
