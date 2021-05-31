@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Brand Name Required':
+                statusCode = 422;
+                message =
+                    'Brand Name Required: Brand name required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'New Password Required':
                 statusCode = 422;
                 message =
