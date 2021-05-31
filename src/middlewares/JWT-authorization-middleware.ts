@@ -46,6 +46,28 @@ class JWTAuthorization {
             next(err);
         }
     }
+
+    static async ownerInventoryAuthorization(
+        req: ICustomReq,
+        _res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const foundUser = await UserModel.findOne({ _id: req.userTokenID });
+            if (!foundUser) {
+                throw { name: 'Access Token not Assosiated' };
+            }
+            if (!(String(foundUser._id) === req.query.userID)) {
+                throw { name: 'Forbidden Access' };
+            }
+            if (!(foundUser.role === 'OWNER') && !(foundUser.role === 'INVENTORY')) {
+                throw { name: 'Forbidden Role Access' };
+            }
+            next();
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { JWTAuthorization };
