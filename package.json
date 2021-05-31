@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build": "tsc && copyfiles -u 1 src/views/*.ejs dist/",
+        "build": "tsc && copy-files-from-to --config copy-file-from-to.json",
         "dev": "env-cmd -f ./dotenv/dev.env tsnd --respawn --transpile-only ./src/Server.ts",
         "test": "env-cmd -f ./dotenv/test.env jest --watchAll --runInBand"
     },
@@ -30,7 +30,7 @@
         "@types/nodemailer": "^6.4.2",
         "@types/supertest": "^2.0.11",
         "@types/validator": "^13.1.3",
-        "copyfiles": "^2.4.1",
+        "copy-files-from-to": "^3.2.0",
         "env-cmd": "^10.1.0",
         "jest": "^26.6.3",
         "supertest": "^6.1.3",
