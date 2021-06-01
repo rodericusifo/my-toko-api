@@ -13,6 +13,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Invalid Product Code':
+                statusCode = 422;
+                message = 'Invalid Product Code: Product code only contains numbers';
+                status = 'Unprocessable Entity';
+                break;
             case 'Brand Name Required':
                 statusCode = 422;
                 message =
