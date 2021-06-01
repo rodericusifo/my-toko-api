@@ -21,6 +21,11 @@ class RProduct {
             [JWTAuthorization.ownerInventoryAuthorization],
             ProductController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            ProductController.list
+        );
     }
 }
 

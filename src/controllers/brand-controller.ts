@@ -26,7 +26,7 @@ class BrandController {
 
     static async list(_req: ICustomReq, res: Response, next: NextFunction) {
         try {
-            const foundBrands = await BrandModel.find({}, 'name');
+            const foundBrands = await BrandModel.find({}, 'name createdAt');
             if (foundBrands.length < 1) {
                 throw { name: 'Brands not Found' };
             }

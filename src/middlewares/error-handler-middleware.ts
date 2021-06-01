@@ -13,10 +13,21 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Products not Found':
+                statusCode = 404;
+                message = 'Products not Found: Cannot find products';
+                status = 'Not Found';
+                break;
             case 'Invalid Product Code':
                 statusCode = 422;
-                message = 'Invalid Product Code: Product code only contains numbers';
+                message =
+                    'Invalid Product Code: Product code only contains numbers';
                 status = 'Unprocessable Entity';
+                break;
+            case 'Brands not Found':
+                statusCode = 404;
+                message = 'Brands not Found: Cannot find brands';
+                status = 'Not Found';
                 break;
             case 'Brand Name Required':
                 statusCode = 422;
