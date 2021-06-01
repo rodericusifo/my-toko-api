@@ -52,6 +52,38 @@ class ProductController {
             next(err);
         }
     }
+
+    static async edit(req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            if (req.body.code) {
+                if (!validator.isNumeric(req.body.code.slice(3))) {
+                    throw { name: 'Invalid Product Code' };
+                }
+            }
+            const editProduct = {
+                name: req.body.name,
+                code: req.body.code
+            };
+            for (const key in editProduct) {
+                if (!editProduct[key]) {
+                    delete editProduct[key];
+                }
+            }
+            await ProductModel.findOneAndUpdate(
+                { _id: req.params.productID },
+                editProduct,
+                { new: true }
+            );
+            res.status(200).json({
+                success: true,
+                message: 'Edit Product Success',
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { ProductController };

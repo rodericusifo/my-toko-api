@@ -26,6 +26,11 @@ class RProduct {
             [JWTAuthorization.ownerInventoryAuthorization],
             ProductController.list
         );
+        this.router.put(
+            '/:productID/edit',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            ProductController.edit
+        );
     }
 }
 
