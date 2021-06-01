@@ -21,6 +21,11 @@ class RBrand {
             [JWTAuthorization.ownerInventoryAuthorization],
             BrandController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            BrandController.list
+        );
     }
 }
 
