@@ -42,7 +42,7 @@ class UserController {
         }
     }
 
-    static async list(req: ICustomReq, res: Response, next: NextFunction) {
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
         try {
             const foundInventoryUsers = await UserModel.find(
                 { role: 'INVENTORY' },

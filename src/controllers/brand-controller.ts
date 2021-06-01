@@ -23,6 +23,24 @@ class BrandController {
             next(err);
         }
     }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundBrands = await BrandModel.find({}, 'name');
+            if (foundBrands.length < 1) {
+                throw { name: 'Brands not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'Brands found',
+                data: { Brands: foundBrands },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { BrandController };
