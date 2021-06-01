@@ -31,6 +31,27 @@ class ProductController {
             next(err);
         }
     }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundProducts = await ProductModel.find(
+                {},
+                'name code image Brand createdAt'
+            ).populate('Brand', 'name createdAt');
+            if (foundProducts.length < 1) {
+                throw { name: 'Products not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'Products found',
+                data: { Products: foundProducts },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { ProductController };

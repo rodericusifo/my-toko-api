@@ -14,4 +14,12 @@ const productCreate = async (
     return productCreated;
 };
 
-export { productCreate };
+const productList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const productListed = await request(app)
+        .get(`/products/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return productListed;
+};
+
+export { productCreate, productList };
