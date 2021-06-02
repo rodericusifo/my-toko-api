@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'UOM Name, Purchase Price, Selling Price, and Brand Required':
+                statusCode = 422;
+                message =
+                    'UOM Name, Purchase Price, Selling Price, and Brand Required: UOM Name, Purchase Price, Selling Price, and Brand required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'Products not Found':
                 statusCode = 404;
                 message = 'Products not Found: Cannot find products';
