@@ -40,6 +40,34 @@ class UOMController {
             next(err);
         }
     }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundListUOM = await UOMModel.find(
+                {},
+                'name purchasePrice sellingPrice stock status Product createdAt'
+            ).populate({
+                path: 'Product',
+                select: 'name code image Brand createdAt',
+                populate: {
+                    path: 'Brand',
+                    select: 'name createdAt'
+                }
+            });
+            if (foundListUOM.length < 1) {
+                throw { name: 'List of UOM not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'List of UOM found',
+                data: { UOMList: foundListUOM },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { UOMController };

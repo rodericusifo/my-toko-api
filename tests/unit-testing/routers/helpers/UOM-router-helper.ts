@@ -19,4 +19,12 @@ const UOMCreate = async (
     return UOMCreated;
 };
 
-export { UOMCreate };
+const UOMList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const UOMListed = await request(app)
+        .get(`/UOM/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return UOMListed;
+};
+
+export { UOMCreate, UOMList };
