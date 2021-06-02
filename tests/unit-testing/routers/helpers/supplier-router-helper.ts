@@ -20,4 +20,14 @@ const supplierCreate = async (
     return supplierCreated;
 };
 
-export { supplierCreate };
+const supplierList = async (
+    authToken: string,
+) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const supplierListed = await request(app)
+        .get(`/suppliers/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`)
+    return supplierListed;
+};
+
+export { supplierCreate, supplierList };

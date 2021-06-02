@@ -21,6 +21,11 @@ class RSupplier {
             [JWTAuthorization.ownerInventoryAuthorization],
             SupplierController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            SupplierController.list
+        );
     }
 }
 
