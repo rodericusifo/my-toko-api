@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Supplier Name, Company Name, Phone Number, Email, and Discount Required':
+                statusCode = 422;
+                message =
+                    'Supplier Name, Company Name, Phone Number, Email, and Discount Required: Supplier Name, Company Name, Phone Number, Email, and Discount required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'List of UOM not Found':
                 statusCode = 404;
                 message = 'List of UOM not Found: Cannot find list of UOM';
