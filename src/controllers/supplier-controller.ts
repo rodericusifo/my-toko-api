@@ -41,6 +41,24 @@ class SupplierController {
             next(err);
         }
     }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundSuppliers = await SupplierModel.find({}, 'name companyName phoneNumber email discount createdAt');
+            if (foundSuppliers.length < 1) {
+                throw { name: 'Brands not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'Suppliers found',
+                data: { Suppliers: foundSuppliers },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { SupplierController };
