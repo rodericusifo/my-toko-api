@@ -68,6 +68,36 @@ class UOMController {
             next(err);
         }
     }
+
+    static async editStatus(
+        req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const editStatusUOM = {
+                status: req.query.status as string
+            };
+            for (const key in editStatusUOM) {
+                if (!editStatusUOM[key]) {
+                    delete editStatusUOM[key];
+                }
+            }
+            await UOMModel.findOneAndUpdate(
+                { _id: req.params.UOMID },
+                editStatusUOM,
+                { new: true }
+            );
+            res.status(200).json({
+                success: true,
+                message: 'Edit status UOM success',
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { UOMController };
