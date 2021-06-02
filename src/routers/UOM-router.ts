@@ -21,6 +21,11 @@ class RUOM {
             [JWTAuthorization.ownerInventoryAuthorization],
             UOMController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            UOMController.list
+        );
     }
 }
 
