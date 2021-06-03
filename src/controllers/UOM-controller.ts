@@ -48,10 +48,10 @@ class UOMController {
                 'name purchasePrice sellingPrice stock status Product createdAt'
             ).populate({
                 path: 'Product',
-                select: 'name code image Brand createdAt',
+                select: 'name code image Brand',
                 populate: {
                     path: 'Brand',
-                    select: 'name createdAt'
+                    select: 'name'
                 }
             });
             if (foundListUOM.length < 1) {

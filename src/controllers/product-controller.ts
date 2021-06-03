@@ -37,7 +37,7 @@ class ProductController {
             const foundProducts = await ProductModel.find(
                 {},
                 'name code image Brand createdAt'
-            ).populate('Brand', 'name createdAt');
+            ).populate('Brand', 'name');
             if (foundProducts.length < 1) {
                 throw { name: 'Products not Found' };
             }
