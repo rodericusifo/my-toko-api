@@ -27,4 +27,16 @@ const UOMList = async (authToken: string) => {
     return UOMListed;
 };
 
-export { UOMCreate, UOMList };
+const UOMEditStatus = async (
+    authToken: string,
+    status: string,
+    UOMID: string
+) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const UOMListed = await request(app)
+        .put(`/UOM/${UOMID}/edit-status?userID=${decoded.id}&&status=${status}`)
+        .set('Authorization', `${authToken}`);
+    return UOMListed;
+};
+
+export { UOMCreate, UOMList, UOMEditStatus };

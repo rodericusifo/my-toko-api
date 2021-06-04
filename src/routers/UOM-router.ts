@@ -26,6 +26,11 @@ class RUOM {
             [JWTAuthorization.ownerInventoryAuthorization],
             UOMController.list
         );
+        this.router.put(
+            '/:UOMID/edit-status',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            UOMController.editStatus
+        );
     }
 }
 
