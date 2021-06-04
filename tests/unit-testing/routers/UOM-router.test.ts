@@ -189,7 +189,7 @@ describe('PUT /UOM/:UOMID/edit-status - UOM Edit Status Endpoint', () => {
         await ProductModel.deleteMany();
         await UOMModel.deleteMany();
     });
-    it('Should be able to see list UOM', async () => {
+    it('Should be able to edit status UOM', async () => {
         const UOMStatusEdited = await UOMEditStatus(
             authLoggedResponse.body.data.Authorization,
             'NOT ACTIVE',
