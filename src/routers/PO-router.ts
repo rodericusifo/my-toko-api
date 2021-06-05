@@ -21,6 +21,11 @@ class RPO {
             [JWTAuthorization.ownerInventoryAuthorization],
             POController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            POController.list
+        );
     }
 }
 

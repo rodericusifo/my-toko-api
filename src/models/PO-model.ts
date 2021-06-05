@@ -15,7 +15,7 @@ const POSchema = new Schema(
             type: String,
             trim: true,
             unique: true,
-            default: undefined
+            required: true
         },
         INVDate: { type: Date, default: undefined },
         billTo: {
