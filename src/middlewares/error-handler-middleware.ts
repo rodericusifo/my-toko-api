@@ -13,6 +13,18 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Product UOM not Found for PO Product':
+                statusCode = 404;
+                message =
+                    'Product UOM not Found for PO Product: Cannot find Product UOM for PO Product';
+                status = 'Not Found';
+                break;
+            case 'Product Quantity and UOM Required':
+                statusCode = 422;
+                message =
+                    'Product Quantity and UOM Required: Product Quantity and UOM required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'List of PO not Found':
                 statusCode = 404;
                 message = 'List of PO not Found: Cannot find list of PO';

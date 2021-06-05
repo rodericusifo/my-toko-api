@@ -25,6 +25,12 @@ const POSchema = new Schema(
             email: { type: String, trim: true, default: undefined }
         },
         status: { type: String, trim: true, default: undefined },
+        POProducts: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'POProduct'
+            }
+        ],
         subTotal: { type: Number, min: 0, default: 0 },
         total: { type: Number, min: 0, default: 0 },
         Supplier: {

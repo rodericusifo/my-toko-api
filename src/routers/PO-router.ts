@@ -31,6 +31,11 @@ class RPO {
             [JWTAuthorization.ownerInventoryAuthorization],
             POController.IDDetail
         );
+        this.router.post(
+            '/:POID/add-product',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            POController.IDAddProduct
+        );
     }
 }
 
