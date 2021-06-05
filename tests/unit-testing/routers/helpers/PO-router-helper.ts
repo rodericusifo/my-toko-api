@@ -24,4 +24,12 @@ const POCreate = async (
     return POCreated;
 };
 
-export { POCreate };
+const POList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const POListed = await request(app)
+        .get(`/PO/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return POListed;
+};
+
+export { POCreate, POList };

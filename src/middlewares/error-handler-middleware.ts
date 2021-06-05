@@ -13,6 +13,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of PO not Found':
+                statusCode = 404;
+                message = 'List of PO not Found: Cannot find list of PO';
+                status = 'Not Found';
+                break;
             case 'PO Number, Date, Ship To Name, Ship To Company Name, Ship To Phone Number, Ship To Email, and Supplier Required':
                 statusCode = 422;
                 message =
@@ -132,7 +137,7 @@ class ErrorHandler {
                 break;
             case 'MongoError':
                 statusCode = 422;
-                message = `MongoError: Sorry this data has been used by another user, please enter another unique data`;
+                message = `MongoError: Sorry this data has been used, please enter another unique data`;
                 status = 'Unprocessable Entity';
                 break;
             case 'ValidationError':

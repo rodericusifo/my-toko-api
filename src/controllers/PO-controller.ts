@@ -27,7 +27,8 @@ class POController {
                     email: req.body.shipTo.email,
                     phoneNumber: req.body.shipTo.phoneNumber
                 },
-                Supplier: req.body.Supplier
+                Supplier: req.body.Supplier,
+                INVNumber: `undefined${req.body.PONumber.slice(2)}`
             };
             const newPO = new POModel(createPO);
             await newPO.save();
@@ -36,6 +37,27 @@ class POController {
                 message: 'Create PO Success',
                 status: 'Created',
                 statusCode: 201
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundListPO = await POModel.find(
+                {},
+                'PONumber PODate createdAt'
+            );
+            if (foundListPO.length < 1) {
+                throw { name: 'List of PO not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'List of PO found',
+                data: { POList: foundListPO },
+                status: 'OK',
+                statusCode: 200
             });
         } catch (err) {
             next(err);
