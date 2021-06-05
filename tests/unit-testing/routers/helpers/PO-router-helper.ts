@@ -32,4 +32,12 @@ const POList = async (authToken: string) => {
     return POListed;
 };
 
-export { POCreate, POList };
+const POIDDetail = async (authToken: string, POID: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const POIDDetailed = await request(app)
+        .get(`/PO/${POID}/detail?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return POIDDetailed;
+};
+
+export { POCreate, POList, POIDDetail };
