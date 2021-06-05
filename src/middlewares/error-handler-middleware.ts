@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'PO Number, Date, Ship To Name, Ship To Company Name, Ship To Phone Number, Ship To Email, and Supplier Required':
+                statusCode = 422;
+                message =
+                    'PO Number, Date, Ship To Name, Ship To Company Name, Ship To Phone Number, Ship To Email, and Supplier Required: PO Number, Date, Ship To Name, Ship To Company Name, Ship To Phone Number, Ship To Email, and Supplier required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'Supplier Name, Company Name, Phone Number, Email, and Discount Required':
                 statusCode = 422;
                 message =
