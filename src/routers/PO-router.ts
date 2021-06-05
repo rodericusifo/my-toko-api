@@ -26,6 +26,11 @@ class RPO {
             [JWTAuthorization.ownerInventoryAuthorization],
             POController.list
         );
+        this.router.get(
+            '/:POID/detail',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            POController.IDDetail
+        );
     }
 }
 

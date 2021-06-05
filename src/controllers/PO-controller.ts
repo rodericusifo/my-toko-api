@@ -63,6 +63,29 @@ class POController {
             next(err);
         }
     }
+
+    static async IDDetail(req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundPO = await POModel.findOne(
+                {
+                    _id: req.params.POID
+                },
+                'PONumber PODate Supplier shipTo subTotal total'
+            ).populate(
+                'Supplier',
+                'name companyName phoneNumber email discount'
+            );
+            res.status(200).json({
+                success: true,
+                message: 'PO found',
+                data: { PO: foundPO },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { POController };
