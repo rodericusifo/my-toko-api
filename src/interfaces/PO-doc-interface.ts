@@ -18,6 +18,7 @@ interface IPODoc extends Document {
         email: string;
     };
     status: string;
+    POProducts: string[];
     subTotal: number;
     total: number;
     Supplier: string;
