@@ -73,7 +73,7 @@ class POController {
                 {
                     _id: req.params.POID
                 },
-                'PONumber PODate Supplier shipTo subTotal total POProducts'
+                'PONumber PODate Supplier shipTo subTotal total POProducts INVCreated'
             )
                 .populate(
                     'Supplier',
