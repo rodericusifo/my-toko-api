@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { ErrorHandler } from '../middlewares/error-handler-middleware';
 import { authRouter } from './auth-router';
 import { brandRouter } from './brand-router';
+import { DORouter } from './DO-router';
 import { PORouter } from './PO-router';
 import { productRouter } from './product-router';
 import { supplierRouter } from './supplier-router';
@@ -28,6 +29,7 @@ class RCentral {
         this.router.use('/UOM', UOMRouter);
         this.router.use('/suppliers', supplierRouter);
         this.router.use('/PO', PORouter);
+        this.router.use('/DO', DORouter);
         this.router.use(ErrorHandler.handleErrors);
     }
 }

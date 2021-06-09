@@ -13,6 +13,18 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'DO Quantity Exceeds the Amount Ordered':
+                statusCode = 422;
+                message =
+                    'DO Quantity Exceeds the Amount Ordered: DO quantity exceeds the amount ordered';
+                status = 'Unprocessable Entity';
+                break;
+            case 'DO Number, Date, POProduct, and Quantity Required':
+                statusCode = 422;
+                message =
+                    'DO Number, Date, POProduct, and Quantity Required: DO Number, Date, POProduct, and Quantity required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'List of All PO Product not Found':
                 statusCode = 404;
                 message =
