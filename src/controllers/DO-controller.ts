@@ -1,9 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { ICustomReq } from '../interfaces/custom-req-interface';
 import { DOModel } from '../models/DO-model';
-import { POModel } from '../models/PO-model';
 import { POProductModel } from '../models/PO-product-model';
-import { SupplierModel } from '../models/supplier-model';
 import { UOMModel } from '../models/UOM-model';
 
 class DOController {
@@ -50,6 +48,38 @@ class DOController {
                 message: 'Create DO Success',
                 status: 'Created',
                 statusCode: 201
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundListDO = await DOModel.find(
+                {},
+                'DONumber DODate POProduct quantity'
+            ).populate({
+                path: 'POProduct',
+                select: 'UOM PO',
+                populate: [
+                    {
+                        path: 'UOM',
+                        select: 'name',
+                        populate: { path: 'Product', select: 'name' }
+                    },
+                    { path: 'PO', select: 'PONumber' }
+                ]
+            });
+            if (foundListDO.length < 1) {
+                throw { name: 'List of DO not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'List of DO found',
+                data: { DOList: foundListDO },
+                status: 'OK',
+                statusCode: 200
             });
         } catch (err) {
             next(err);

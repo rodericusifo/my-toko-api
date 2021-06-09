@@ -19,4 +19,12 @@ const DOCreate = async (
     return DOCreated;
 };
 
-export { DOCreate };
+const DOList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const DOListed = await request(app)
+        .get(`/DO/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return DOListed;
+};
+
+export { DOCreate, DOList };

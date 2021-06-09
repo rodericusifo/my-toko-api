@@ -13,6 +13,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of DO not Found':
+                statusCode = 404;
+                message = 'List of DO not Found: Cannot find list of DO';
+                status = 'Not Found';
+                break;
             case 'DO Quantity Exceeds the Amount Ordered':
                 statusCode = 422;
                 message =
