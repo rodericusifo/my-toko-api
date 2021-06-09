@@ -21,6 +21,11 @@ class RDO {
             [JWTAuthorization.ownerInventoryAuthorization],
             DOController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            DOController.list
+        );
     }
 }
 
