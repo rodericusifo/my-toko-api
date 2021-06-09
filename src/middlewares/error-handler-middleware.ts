@@ -13,6 +13,17 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of All PO Product not Found':
+                statusCode = 404;
+                message =
+                    'List of All PO Product not Found: Cannot find List of All PO Product';
+                status = 'Not Found';
+                break;
+            case 'PO not Found':
+                statusCode = 404;
+                message = 'PO not Found: Cannot find the PO';
+                status = 'Not Found';
+                break;
             case 'Product UOM not Found for PO Product':
                 statusCode = 404;
                 message =
