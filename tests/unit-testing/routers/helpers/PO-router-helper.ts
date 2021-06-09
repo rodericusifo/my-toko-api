@@ -56,4 +56,12 @@ const POIDAddProduct = async (
     return POIDAddedProduct;
 };
 
-export { POCreate, POList, POIDDetail, POIDAddProduct };
+const POProductList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const POProductListed = await request(app)
+        .get(`/PO/list-product?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return POProductListed;
+};
+
+export { POCreate, POList, POIDDetail, POIDAddProduct, POProductList };

@@ -36,6 +36,11 @@ class RPO {
             [JWTAuthorization.ownerInventoryAuthorization],
             POController.IDAddProduct
         );
+        this.router.get(
+            '/list-product',
+            [JWTAuthorization.ownerInventoryAuthorization],
+            POController.listProduct
+        );
     }
 }
 

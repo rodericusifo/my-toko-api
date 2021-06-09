@@ -88,6 +88,9 @@ class POController {
                         populate: { path: 'Product', select: 'name' }
                     }
                 });
+            if (!foundPO) {
+                throw { name: 'PO not Found' };
+            }
             res.status(200).json({
                 success: true,
                 message: 'PO found',
@@ -155,6 +158,40 @@ class POController {
                 message: 'Add Product PO Success',
                 status: 'Created',
                 statusCode: 201
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async listProduct(
+        _req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const foundPOProductList = await POProductModel.find(
+                { remaining: { $gt: 0 } },
+                'UOM PO'
+            )
+                .populate({
+                    path: 'UOM',
+                    select: 'name',
+                    populate: { path: 'Product', select: 'name' }
+                })
+                .populate({
+                    path: 'PO',
+                    select: 'PONumber'
+                });
+            if (foundPOProductList.length < 1) {
+                throw { name: 'List of All PO Product not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'All List PO Product found',
+                data: { POProductList: foundPOProductList },
+                status: 'OK',
+                statusCode: 200
             });
         } catch (err) {
             next(err);
