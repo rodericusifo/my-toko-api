@@ -58,7 +58,7 @@ class DOController {
         try {
             const foundListDO = await DOModel.find(
                 {},
-                'DONumber DODate POProduct quantity'
+                'DONumber DODate POProduct quantity createdAt'
             ).populate({
                 path: 'POProduct',
                 select: 'UOM PO',
