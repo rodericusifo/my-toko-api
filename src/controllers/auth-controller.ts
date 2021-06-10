@@ -92,10 +92,12 @@ class AuthController {
                 host: 'smtp.gmail.com',
                 port: 587,
                 secure: false,
-                requireTLS: true,
                 auth: {
                     user: process.env.EMAIL!,
                     pass: process.env.EMAIL_PASS!
+                },
+                tls: {
+                    rejectUnauthorized: false
                 }
             });
 
@@ -145,7 +147,10 @@ class AuthController {
                 password: req.body.password
             };
             if (req.body.password) {
-                userPasswordReset.password = await bcrypt.hash(req.body.password, 8);
+                userPasswordReset.password = await bcrypt.hash(
+                    req.body.password,
+                    8
+                );
             }
             await UserModel.findOneAndUpdate(
                 { _id: decoded.id },
