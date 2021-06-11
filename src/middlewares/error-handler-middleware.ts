@@ -13,6 +13,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of AR not Found':
+                statusCode = 404;
+                message = 'List of AR not Found: Cannot find list of AR';
+                status = 'Not Found';
+                break;
             case 'invoice Number, Date, and PO ID Required':
                 statusCode = 422;
                 message =
