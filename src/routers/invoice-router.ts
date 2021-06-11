@@ -21,6 +21,11 @@ class Rinvoice {
             [JWTAuthorization.ownerFinanceAuthorization],
             invoiceController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerFinanceAuthorization],
+            invoiceController.list
+        );
     }
 }
 

@@ -30,6 +30,27 @@ class invoiceController {
             next(err);
         }
     }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundListInvoice = await POModel.find(
+                { INVCreated: true },
+                'INVNumber INVDate PONumber status'
+            );
+            if (foundListInvoice.length < 1) {
+                throw { name: 'List of Invoice not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'List of PO found',
+                data: { Invoices: foundListInvoice },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { invoiceController };

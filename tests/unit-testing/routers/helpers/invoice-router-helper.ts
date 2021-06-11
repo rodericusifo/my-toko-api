@@ -18,4 +18,12 @@ const invoiceCreate = async (
     return invoiceCreated;
 };
 
-export { invoiceCreate };
+const invoiceList = async (authToken: string) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const invoiceListed = await request(app)
+        .get(`/invoices/list?userID=${decoded.id}`)
+        .set('Authorization', `${authToken}`);
+    return invoiceListed;
+};
+
+export { invoiceCreate, invoiceList };
