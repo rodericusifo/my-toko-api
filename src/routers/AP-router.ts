@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { ARController } from '../controllers/AR-controller';
+import { APController } from '../controllers/AP-controller';
 import { JWTAuthorization } from '../middlewares/JWT-authorization-middleware';
 
-class RAR {
+class RAP {
     private router: Router;
 
     constructor(router: Router) {
@@ -19,11 +19,11 @@ class RAR {
         this.router.get(
             '/list',
             [JWTAuthorization.ownerFinanceAuthorization],
-            ARController.list
+            APController.list
         );
     }
 }
 
-const ARRouter = new RAR(Router()).getRouter();
+const APRouter = new RAP(Router()).getRouter();
 
-export { ARRouter };
+export { APRouter };

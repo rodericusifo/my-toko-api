@@ -11,7 +11,7 @@ import {
     invoiceIDEditStatus,
     invoiceList
 } from './helpers/invoice-router-helper';
-import { accountRecievableList } from './helpers/account-recievable-router-helper';
+import { accountPayableList } from './helpers/account-payable-router-helper';
 
 describe('PUT /invoices/:invoiceID/edit-status - Invoice ID Edit Status Endpoint', () => {
     let authLoggedResponse: request.Response;
@@ -85,10 +85,10 @@ describe('PUT /invoices/:invoiceID/edit-status - Invoice ID Edit Status Endpoint
         await SupplierModel.deleteMany();
         await POModel.deleteMany();
     });
-    it('Should be able to see account recievable list', async () => {
-        const accountRecievableListed = await accountRecievableList(
+    it('Should be able to see account payable list', async () => {
+        const accountPayableListed = await accountPayableList(
             authLoggedResponse.body.data.Authorization
         );
-        expect(accountRecievableListed.status).toEqual(200);
+        expect(accountPayableListed.status).toEqual(200);
     });
 });
