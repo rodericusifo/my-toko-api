@@ -60,7 +60,61 @@ class JWTAuthorization {
             if (!(String(foundUser._id) === req.query.userID)) {
                 throw { name: 'Forbidden Access' };
             }
-            if (!(foundUser.role === 'OWNER') && !(foundUser.role === 'INVENTORY')) {
+            if (
+                !(foundUser.role === 'OWNER') &&
+                !(foundUser.role === 'INVENTORY')
+            ) {
+                throw { name: 'Forbidden Role Access' };
+            }
+            next();
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async ownerInventoryFinanceAuthorization(
+        req: ICustomReq,
+        _res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const foundUser = await UserModel.findOne({ _id: req.userTokenID });
+            if (!foundUser) {
+                throw { name: 'Access Token not Assosiated' };
+            }
+            if (!(String(foundUser._id) === req.query.userID)) {
+                throw { name: 'Forbidden Access' };
+            }
+            if (
+                !(foundUser.role === 'OWNER') &&
+                !(foundUser.role === 'INVENTORY') &&
+                !(foundUser.role === 'FINANCE')
+            ) {
+                throw { name: 'Forbidden Role Access' };
+            }
+            next();
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async ownerFinanceAuthorization(
+        req: ICustomReq,
+        _res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const foundUser = await UserModel.findOne({ _id: req.userTokenID });
+            if (!foundUser) {
+                throw { name: 'Access Token not Assosiated' };
+            }
+            if (!(String(foundUser._id) === req.query.userID)) {
+                throw { name: 'Forbidden Access' };
+            }
+            if (
+                !(foundUser.role === 'OWNER') &&
+                !(foundUser.role === 'FINANCE')
+            ) {
                 throw { name: 'Forbidden Role Access' };
             }
             next();

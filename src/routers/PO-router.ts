@@ -23,7 +23,7 @@ class RPO {
         );
         this.router.get(
             '/list',
-            [JWTAuthorization.ownerInventoryAuthorization],
+            [JWTAuthorization.ownerInventoryFinanceAuthorization],
             POController.list
         );
         this.router.get(

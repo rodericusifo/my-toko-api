@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'invoice Number, Date, and PO ID Required':
+                statusCode = 422;
+                message =
+                    'invoice Number, Date, and PO ID Required: invoice Number, Date, and PO ID required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'List of DO not Found':
                 statusCode = 404;
                 message = 'List of DO not Found: Cannot find list of DO';
