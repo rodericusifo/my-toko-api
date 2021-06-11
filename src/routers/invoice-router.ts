@@ -26,6 +26,11 @@ class Rinvoice {
             [JWTAuthorization.ownerFinanceAuthorization],
             invoiceController.list
         );
+        this.router.put(
+            '/:invoiceID/edit-status',
+            [JWTAuthorization.ownerFinanceAuthorization],
+            invoiceController.IDeditStatus
+        );
     }
 }
 
