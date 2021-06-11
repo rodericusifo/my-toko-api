@@ -26,4 +26,18 @@ const invoiceList = async (authToken: string) => {
     return invoiceListed;
 };
 
-export { invoiceCreate, invoiceList };
+const invoiceIDEditStatus = async (
+    authToken: string,
+    status: string,
+    invoiceID: string
+) => {
+    const decoded = JWTDecodeAuthToken(authToken);
+    const invoiceIDEditedStatus = await request(app)
+        .put(
+            `/invoices/${invoiceID}/edit-status?userID=${decoded.id}&&status=${status}`
+        )
+        .set('Authorization', `${authToken}`);
+    return invoiceIDEditedStatus;
+};
+
+export { invoiceCreate, invoiceList, invoiceIDEditStatus };

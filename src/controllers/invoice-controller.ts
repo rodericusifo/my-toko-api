@@ -51,6 +51,36 @@ class invoiceController {
             next(err);
         }
     }
+
+    static async IDeditStatus(
+        req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const editStatusInvoice = {
+                status: req.query.status as string
+            };
+            for (const key in editStatusInvoice) {
+                if (!editStatusInvoice[key]) {
+                    delete editStatusInvoice[key];
+                }
+            }
+            await POModel.findOneAndUpdate(
+                { _id: req.params.invoiceID },
+                editStatusInvoice,
+                { new: true }
+            );
+            res.status(200).json({
+                success: true,
+                message: 'Edit status Invoice success',
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { invoiceController };
