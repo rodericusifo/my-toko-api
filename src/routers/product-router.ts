@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { upload } from '../configs/multer-config';
 import { ProductController } from '../controllers/product-controller';
 import { JWTAuthorization } from '../middlewares/JWT-authorization-middleware';
 
@@ -19,6 +20,7 @@ class RProduct {
         this.router.post(
             '/create',
             [JWTAuthorization.ownerInventoryAuthorization],
+            upload.single('image'),
             ProductController.create
         );
         this.router.get(
@@ -29,6 +31,7 @@ class RProduct {
         this.router.put(
             '/:productID/edit',
             [JWTAuthorization.ownerInventoryAuthorization],
+            upload.single('image'),
             ProductController.edit
         );
     }
