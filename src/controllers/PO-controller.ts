@@ -50,7 +50,7 @@ class POController {
         try {
             const foundListPO = await POModel.find(
                 {},
-                'PONumber PODate createdAt'
+                'PONumber PODate INVCreated createdAt'
             );
             if (foundListPO.length < 1) {
                 throw { name: 'List of PO not Found' };
@@ -73,7 +73,7 @@ class POController {
                 {
                     _id: req.params.POID
                 },
-                'PONumber PODate Supplier shipTo subTotal total POProducts INVCreated'
+                'PONumber PODate Supplier shipTo subTotal total POProducts INVCreated status'
             )
                 .populate(
                     'Supplier',
