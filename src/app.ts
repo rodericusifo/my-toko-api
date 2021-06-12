@@ -36,8 +36,11 @@ class App {
 
     private middlewares(): void {
         this.framework.use(cors());
-        this.framework.use(express.json());
-        this.framework.use(express.urlencoded({ extended: true }));
+        this.framework.use(express.json({ limit: '50mb' }));
+        this.framework.use(
+            express.urlencoded({ extended: true, limit: '50mb' })
+        );
+        this.framework.use('/public', express.static('public'));
         this.framework.use(centralRouter);
     }
 }

@@ -14,10 +14,12 @@ class ProductController {
                     throw { name: 'Invalid Product Code' };
                 }
             }
+            const url = req.protocol + '://' + req.get('host');
             const createProduct = {
                 name: req.body.name,
                 code: req.body.code,
-                Brand: req.body.Brand
+                Brand: req.body.Brand,
+                image: url + '/public/' + req.file.filename
             };
             const newProduct = new ProductModel(createProduct);
             await newProduct.save();
@@ -60,9 +62,11 @@ class ProductController {
                     throw { name: 'Invalid Product Code' };
                 }
             }
-            const editProduct = {
+            const url = req.protocol + '://' + req.get('host');
+            const editProduct: { [key: string]: any } = {
                 name: req.body.name,
-                code: req.body.code
+                code: req.body.code,
+                image: url + '/public/' + req.file.filename
             };
             for (const key in editProduct) {
                 if (!editProduct[key]) {
