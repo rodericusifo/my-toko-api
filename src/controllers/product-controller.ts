@@ -15,12 +15,14 @@ class ProductController {
                 }
             }
             const url = req.protocol + '://' + req.get('host');
-            const createProduct = {
+            const createProduct: { [key: string]: any } = {
                 name: req.body.name,
                 code: req.body.code,
-                Brand: req.body.Brand,
-                image: url + '/public/' + req.file.filename
+                Brand: req.body.Brand
             };
+            if (req.file) {
+                createProduct.image = url + '/public/' + req.file.filename;
+            }
             const newProduct = new ProductModel(createProduct);
             await newProduct.save();
             res.status(201).json({
@@ -65,9 +67,11 @@ class ProductController {
             const url = req.protocol + '://' + req.get('host');
             const editProduct: { [key: string]: any } = {
                 name: req.body.name,
-                code: req.body.code,
-                image: url + '/public/' + req.file.filename
+                code: req.body.code
             };
+            if (req.file) {
+                editProduct.image = url + '/public/' + req.file.filename;
+            }
             for (const key in editProduct) {
                 if (!editProduct[key]) {
                     delete editProduct[key];

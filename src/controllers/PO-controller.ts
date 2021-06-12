@@ -172,7 +172,7 @@ class POController {
         try {
             const foundPOProductList = await POProductModel.find(
                 { remaining: { $gt: 0 } },
-                'UOM PO'
+                'UOM PO remaining'
             )
                 .populate({
                     path: 'UOM',
