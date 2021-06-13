@@ -1,6 +1,8 @@
 import { Response, NextFunction } from 'express';
 import { ICustomReq } from '../interfaces/custom-req-interface';
 import { OrderModel } from '../models/order-model';
+import { OrderProductModel } from '../models/order-product-model';
+import { UOMModel } from '../models/UOM-model';
 
 class OrderController {
     static async create(req: ICustomReq, res: Response, next: NextFunction) {
@@ -85,6 +87,64 @@ class OrderController {
                 data: { Order: foundOrder },
                 status: 'OK',
                 statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async IDAddProduct(
+        req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            if (!req.body.quantity || !req.body.UOM) {
+                throw {
+                    name: 'Product Quantity and UOM Required'
+                };
+            }
+            const foundUOM = await UOMModel.findOne({
+                _id: req.body.UOM
+            });
+            if (!foundUOM) {
+                throw { name: 'Product UOM not Found for Order Product' };
+            }
+            const createOrderProduct: { [key: string]: string | number } = {
+                quantity: req.body.quantity,
+                UOM: req.body.UOM
+            };
+            if (req.body.quantity && req.body.UOM) {
+                createOrderProduct.amount =
+                    req.body.quantity * foundUOM.sellingPrice;
+            }
+            const newOrderProduct = new OrderProductModel(createOrderProduct);
+            const savedOrderProduct = await newOrderProduct.save();
+            await OrderModel.findOneAndUpdate(
+                { _id: req.params.orderID },
+                {
+                    $push: { OrderProducts: savedOrderProduct._id },
+                    $inc: { subTotal: savedOrderProduct.amount }
+                },
+                { new: true }
+            );
+            const foundOrder = await OrderModel.findOne({
+                _id: req.params.orderID
+            });
+            await OrderModel.findOneAndUpdate(
+                { _id: req.params.orderID },
+                {
+                    total:
+                        foundOrder!.subTotal +
+                        foundOrder!.subTotal * (foundOrder!.tax / 100)
+                },
+                { new: true }
+            );
+            res.status(201).json({
+                success: true,
+                message: 'Add Product Order Success',
+                status: 'Created',
+                statusCode: 201
             });
         } catch (err) {
             next(err);
