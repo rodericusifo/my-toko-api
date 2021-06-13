@@ -13,6 +13,12 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Order Number, Date, Customer Name and Is Taxed Required':
+                statusCode = 422;
+                message =
+                    'Order Number, Date, Customer Name and Is Taxed Required: Order Number, Date, Customer Name and Is Taxed Required to perform this action';
+                status = 'Unprocessable Entity';
+                break;
             case 'List of UOM Active not Found':
                 statusCode = 404;
                 message =
