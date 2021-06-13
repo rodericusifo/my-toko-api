@@ -69,6 +69,34 @@ class UOMController {
         }
     }
 
+    static async listActive(
+        _req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const foundListActiveUOM = await UOMModel.find(
+                { status: 'ACTIVE' },
+                'name sellingPrice stock Product'
+            ).populate({
+                path: 'Product',
+                select: 'name image'
+            });
+            if (foundListActiveUOM.length < 1) {
+                throw { name: 'List of UOM Active not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'List of UOM Active found',
+                data: { UOMActiveList: foundListActiveUOM },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
     static async editStatus(
         req: ICustomReq,
         res: Response,
