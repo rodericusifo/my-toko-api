@@ -62,6 +62,37 @@ class OrderController {
         }
     }
 
+    static async IDDetail(req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundOrder = await OrderModel.findOne(
+                {
+                    _id: req.params.orderID
+                },
+                'orderNumber orderDate customerName status canceledReason OrderProducts subTotal total tax'
+            ).populate({
+                path: 'OrderProducts',
+                select: 'quantity amount UOM',
+                populate: {
+                    path: 'UOM',
+                    select: 'name sellingPrice Product',
+                    populate: { path: 'Product', select: 'name' }
+                }
+            });
+            if (!foundOrder) {
+                throw { name: 'Order not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'Order found',
+                data: { Order: foundOrder },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
+
     static async IDAddProduct(
         req: ICustomReq,
         res: Response,

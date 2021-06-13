@@ -13,6 +13,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'Order not Found':
+                statusCode = 404;
+                message = 'Order not Found: Cannot find order';
+                status = 'Not Found';
+                break;
             case 'Product UOM not Found for Order Product':
                 statusCode = 404;
                 message =
