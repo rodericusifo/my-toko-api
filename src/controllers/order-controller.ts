@@ -38,6 +38,27 @@ class OrderController {
             next(err);
         }
     }
+
+    static async list(_req: ICustomReq, res: Response, next: NextFunction) {
+        try {
+            const foundListOrder = await OrderModel.find(
+                {},
+                'orderNumber orderDate status customerName'
+            );
+            if (foundListOrder.length < 1) {
+                throw { name: 'List of Order not Found' };
+            }
+            res.status(200).json({
+                success: true,
+                message: 'List of Order found',
+                data: { Orders: foundListOrder },
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { OrderController };

@@ -21,6 +21,11 @@ class ROrder {
             [JWTAuthorization.ownerCashierAuthorization],
             OrderController.create
         );
+        this.router.get(
+            '/list',
+            [JWTAuthorization.ownerCashierAuthorization],
+            OrderController.list
+        );
     }
 }
 
