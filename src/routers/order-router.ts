@@ -36,6 +36,11 @@ class ROrder {
             [JWTAuthorization.ownerCashierAuthorization],
             OrderController.IDAddProduct
         );
+        this.router.put(
+            '/:orderID/edit-status',
+            [JWTAuthorization.ownerCashierAuthorization],
+            OrderController.IDEditStatus
+        );
     }
 }
 

@@ -150,6 +150,37 @@ class OrderController {
             next(err);
         }
     }
+
+    static async IDEditStatus(
+        req: ICustomReq,
+        res: Response,
+        next: NextFunction
+    ) {
+        try {
+            const editStatusOrder = {
+                status: req.query.status as string,
+                canceledReason: req.body.canceledReason
+            };
+            for (const key in editStatusOrder) {
+                if (!editStatusOrder[key]) {
+                    delete editStatusOrder[key];
+                }
+            }
+            await OrderModel.findOneAndUpdate(
+                { _id: req.params.orderID },
+                editStatusOrder,
+                { new: true }
+            );
+            res.status(200).json({
+                success: true,
+                message: 'Edit status Invoice success',
+                status: 'OK',
+                statusCode: 200
+            });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 export { OrderController };
