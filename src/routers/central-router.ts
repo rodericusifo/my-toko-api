@@ -5,6 +5,7 @@ import { authRouter } from './auth-router';
 import { brandRouter } from './brand-router';
 import { DORouter } from './DO-router';
 import { invoiceRouter } from './invoice-router';
+import { orderRouter } from './order-router';
 import { PORouter } from './PO-router';
 import { productRouter } from './product-router';
 import { supplierRouter } from './supplier-router';
@@ -34,6 +35,7 @@ class RCentral {
         this.router.use('/DO', DORouter);
         this.router.use('/invoices', invoiceRouter);
         this.router.use('/AP', APRouter);
+        this.router.use('/orders', orderRouter);
         this.router.use(ErrorHandler.handleErrors);
     }
 }
