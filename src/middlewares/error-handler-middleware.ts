@@ -13,6 +13,11 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of Order not Found':
+                statusCode = 404;
+                message = 'List of Order not Found: Cannot find list of order';
+                status = 'Not Found';
+                break;
             case 'Order Number, Date, Customer Name and Is Taxed Required':
                 statusCode = 422;
                 message =
