@@ -26,6 +26,11 @@ class ROrder {
             [JWTAuthorization.ownerCashierAuthorization],
             OrderController.list
         );
+        this.router.post(
+            '/:orderID/add-product',
+            [JWTAuthorization.ownerCashierAuthorization],
+            OrderController.IDAddProduct
+        );
     }
 }
 
