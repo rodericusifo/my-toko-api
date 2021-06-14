@@ -3,6 +3,8 @@ import { DBConfig } from './configs/DB-config';
 import { ICustomReq } from './interfaces/custom-req-interface';
 import { centralRouter } from './routers/central-router';
 import cors from 'cors';
+import { UserModel } from './models/user-model';
+import bcrypt from 'bcrypt';
 
 class App {
     private framework: Application;
@@ -19,8 +21,16 @@ class App {
         return this.framework;
     }
 
-    private plugins() {
+    private async plugins() {
         DBConfig.connectDB();
+        const registerOwner = {
+            name: 'Rodericus Ifo Krista',
+            email: 'rodericus1999@gmail.com',
+            password: await bcrypt.hash('211299', 8),
+            role: 'OWNER'
+        };
+        const newUser = new UserModel(registerOwner);
+        await newUser.save();
     }
 
     private settings(): void {
