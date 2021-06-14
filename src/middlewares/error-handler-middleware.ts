@@ -13,6 +13,17 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of AP not Found':
+                statusCode = 404;
+                message = 'List of AP not Found: Cannot find list of AP';
+                status = 'Not Found';
+                break;
+            case 'Ordered Quantity Exceeds the Product Stock':
+                statusCode = 422;
+                message =
+                    'Ordered Quantity Exceeds the Product Stock: Ordered Quantity Exceeds the Product Stock';
+                status = 'Unprocessable Entity';
+                break;
             case 'Order not Found':
                 statusCode = 404;
                 message = 'Order not Found: Cannot find order';

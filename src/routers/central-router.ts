@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { ErrorHandler } from '../middlewares/error-handler-middleware';
 import { APRouter } from './AP-router';
+import { ARRouter } from './AR-router';
 import { authRouter } from './auth-router';
 import { brandRouter } from './brand-router';
 import { DORouter } from './DO-router';
@@ -36,6 +37,7 @@ class RCentral {
         this.router.use('/invoices', invoiceRouter);
         this.router.use('/AP', APRouter);
         this.router.use('/orders', orderRouter);
+        this.router.use('/AR', ARRouter);
         this.router.use(ErrorHandler.handleErrors);
     }
 }
