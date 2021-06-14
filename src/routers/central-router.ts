@@ -5,6 +5,7 @@ import { ARRouter } from './AR-router';
 import { authRouter } from './auth-router';
 import { brandRouter } from './brand-router';
 import { DORouter } from './DO-router';
+import { EStatementRouter } from './e-statement-router';
 import { invoiceRouter } from './invoice-router';
 import { orderRouter } from './order-router';
 import { PORouter } from './PO-router';
@@ -38,6 +39,7 @@ class RCentral {
         this.router.use('/AP', APRouter);
         this.router.use('/orders', orderRouter);
         this.router.use('/AR', ARRouter);
+        this.router.use('/e-statement', EStatementRouter);
         this.router.use(ErrorHandler.handleErrors);
     }
 }
