@@ -6,7 +6,8 @@
     "scripts": {
         "build": "tsc && copy-files-from-to --config copy-file-from-to.json",
         "dev": "env-cmd -f ./dotenv/dev.env tsnd --respawn --transpile-only ./src/Server.ts",
-        "test": "env-cmd -f ./dotenv/test.env jest --watchAll --runInBand"
+        "test": "env-cmd -f ./dotenv/test.env jest --watchAll --runInBand",
+        "start": "node dist/server.js"
     },
     "keywords": [],
     "author": "",
@@ -39,5 +40,9 @@
         "ts-jest": "^26.5.5",
         "ts-node-dev": "^1.1.6",
         "typescript": "^4.2.4"
+    },
+    "engines": {
+        "node": "14.16.0",
+        "npm": "6.14.11"
     }
 }
