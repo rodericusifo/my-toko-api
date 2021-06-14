@@ -13,6 +13,16 @@ class ErrorHandler {
         let status;
 
         switch (err.name) {
+            case 'List of Incomes not Found':
+                statusCode = 404;
+                message = 'List of Incomes not Found: Cannot find list of Incomes';
+                status = 'Not Found';
+                break;
+            case 'List of Expenses not Found':
+                statusCode = 404;
+                message = 'List of Expenses not Found: Cannot find list of Expenses';
+                status = 'Not Found';
+                break;
             case 'List of AP not Found':
                 statusCode = 404;
                 message = 'List of AP not Found: Cannot find list of AP';
