@@ -110,6 +110,9 @@ class OrderController {
             if (!foundUOM) {
                 throw { name: 'Product UOM not Found for Order Product' };
             }
+            if (foundUOM.stock < req.body.quantity) {
+                throw { name: 'Ordered Quantity Exceeds the Product Stock' };
+            }
             const createOrderProduct: { [key: string]: string | number } = {
                 quantity: req.body.quantity,
                 UOM: req.body.UOM
@@ -161,6 +164,25 @@ class OrderController {
                 status: req.query.status as string,
                 canceledReason: req.body.canceledReason
             };
+            if (editStatusOrder.status === 'PAID') {
+                const foundOrder = await OrderModel.findOne({
+                    _id: req.params.orderID
+                });
+                foundOrder!.OrderProducts.forEach(async (OrderProduct) => {
+                    const foundOrderProduct = await OrderProductModel.findOne({
+                        _id: OrderProduct
+                    });
+                    await UOMModel.findOneAndUpdate(
+                        {
+                            _id: foundOrderProduct!.UOM
+                        },
+                        { $inc: { stock: -foundOrderProduct!.quantity } },
+                        {
+                            new: true
+                        }
+                    );
+                });
+            }
             for (const key in editStatusOrder) {
                 if (!editStatusOrder[key]) {
                     delete editStatusOrder[key];
@@ -173,7 +195,7 @@ class OrderController {
             );
             res.status(200).json({
                 success: true,
-                message: 'Edit status Invoice success',
+                message: 'Edit status Order success',
                 status: 'OK',
                 statusCode: 200
             });
