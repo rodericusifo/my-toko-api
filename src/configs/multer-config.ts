@@ -1,8 +1,7 @@
 import multer from 'multer';
-import path from 'path';
 
 // Multer File upload settings
-const DIR = path.join(__dirname, 'public');
+const DIR = './public/';
 
 const storage = multer.diskStorage({
     destination: (_req, _file, cb) => {

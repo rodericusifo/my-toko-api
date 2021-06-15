@@ -3,7 +3,6 @@ import { DBConfig } from './configs/DB-config';
 import { ICustomReq } from './interfaces/custom-req-interface';
 import { centralRouter } from './routers/central-router';
 import cors from 'cors';
-import path from 'path';
 
 class App {
     private framework: Application;
@@ -41,10 +40,7 @@ class App {
         this.framework.use(
             express.urlencoded({ extended: true, limit: '50mb' })
         );
-        this.framework.use(
-            '/public',
-            express.static(path.join(__dirname, 'public'))
-        );
+        this.framework.use('/public', express.static('public'));
         this.framework.use(centralRouter);
     }
 }
