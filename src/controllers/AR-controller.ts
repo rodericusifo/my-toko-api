@@ -7,7 +7,7 @@ class ARController {
         try {
             const foundListAR = await OrderModel.find(
                 { status: 'PAID' },
-                'orderNumber orderDate status total'
+                'orderNumber orderDate status customerName total'
             );
             if (foundListAR.length < 1) {
                 throw { name: 'List of AR not Found' };
