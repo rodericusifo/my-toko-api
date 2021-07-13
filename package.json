@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "build": "tsc && copy-files-from-to --config copy-file-from-to.json",
-        "dev": "env-cmd -f ./dotenv/dev.env tsnd --respawn --transpile-only ./src/Server.ts",
+        "dev": "env-cmd -f ./dotenv/dev.env tsnd --respawn --transpile-only ./src/server.ts",
         "test": "env-cmd -f ./dotenv/test.env jest --watchAll --runInBand",
         "start": "node dist/server.js"
     },
